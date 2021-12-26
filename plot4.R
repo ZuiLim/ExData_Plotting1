@@ -1,0 +1,15 @@
+plot4 <- function() {
+    df <- read.csv("household_pc.csv")
+    png(filename="plot4.png", width=480, height=480)
+    par(mfrow=c(2,2))
+    plot(as.POSIXct(df$DateTime), as.numeric(df$Global_active_power), ylab="Global Active Power (kilowatts)", xlab="", type="l")
+    plot(as.POSIXct(df$DateTime), df$Voltage, ylab="Voltage", xlab="datetime", type="l")
+    plot(as.POSIXct(df$DateTime), df$Sub_metering_1, xlab="", type="n", ylab="Energy sub metering")
+    points(as.POSIXct(df$DateTime), df$Sub_metering_1, type="l", col="black")
+    points(as.POSIXct(df$DateTime), df$Sub_metering_2, type="l", col="red")
+    points(as.POSIXct(df$DateTime), df$Sub_metering_3, type="l", col="blue")
+    legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col=c("black","red","blue"), lty=1)
+    plot(as.POSIXct(df$DateTime), as.numeric(df$Global_reactive_power), ylab="Global reactive power", xlab="datetime", type="l")
+    dev.off()
+    print("Plot4 completed!")
+}
